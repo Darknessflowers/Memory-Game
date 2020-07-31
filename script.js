@@ -107,6 +107,7 @@ let pairs = [
     found: false,
   },
 ];
+let matchedCards = [];
 
 let shuffledArray = shuffleArray(pairs); //will mutate original array
 
@@ -120,7 +121,32 @@ function shuffleArray(array) {
   }
 return array;
 }
-function flipCard(e) {
+let hasFlippedCard = false;
+let firstCard;
+let secondCard;
+function flipCard() {
+  // debugger;
+  this.classList.add('flip');
+  cardsTurnedNum++;
+  console.log(cardsTurnedNum);
+  if (cardsTurnedNum === 1) {
+     hasFlippedCard = true;
+     firstCard = this;
+     console.log(firstCard);
+    //  return;
+  } else if(cardsTurnedNum === 2) {
+    secondCard = this;
+    console.log(secondCard);
+    
+  }
+  if(cardsTurnedNum === 2) {
+    checkForMatch();
+    hasFlippedCard = false;
+    cardsTurnedNum = 0;
+  }
+  
+
+
   //fix bug with back image
   //fix bug where matched cards get flipped back when cards are looped through. May have to store more info about flipped cards.
   
@@ -129,47 +155,84 @@ function flipCard(e) {
   //if not a match then reset array
   //if 2 srcs match then loop through cards and find ID (querySelector?) of ID1 || ID2 and add permaMatch class that keeps it visible even when flipped is removed
 
-  console.log('flip');
-  // console.log(this);
-  if (lockBoard) return;
-  this.classList.add('flip');
-  this.lastElementChild.classList.remove('hidden');
-  this.firstElementChild.classList.add('hidden');
 
-  cardsTurned.push(this.lastElementChild.src);
-  console.log(cardsTurned);
-  if(cardsTurned.length >= 2) {
-    console.log('2 turned');
-    if(cardsTurned[0] === cardsTurned[1]) {
-      increaseScore();
-      cardsTurned = [];
-      //hide cards
-    } else {
-      lockBoard = true;
-      // cards.forEach(card => console.log(card));
-      console.log('flipping back');
-      cardsTurned = [];
+//   console.log('flip');
+//   let firstCard, secondCard;
+//   let haveFlippedACard = false;
+//   // console.log(this);
+//   if (lockBoard) return;
+// //store first and second card in separate variables
+//   if(!haveFlippedACard) {
+//     haveFlippedACard = true;
+//     firstCard = this;
+//     console.log(firstCard);
+//     // return;
+//   } else {
+//     secondCard = this;
+//     haveFlippedACard = false;
+//     console.log(secondCard);
+//   }
+    
 
-      setTimeout(function() {
-        cards.forEach((card) => {
-          // console.log(card.lastElementChild);
-          card.classList.remove('flip');
-          card.firstElementChild.classList.remove('hidden');
-          card.lastElementChild.classList.add('hidden');
-          lockBoard = false;
-        });
-      },1000);
-      // setTimeout(function() {
-      //   cards.forEach(card => {
-      //     console.log(card.lastElementChild);
-      //     // card.classList.remove('flip'));
-      //   }
-      // }, 2000);
-      
-      //turn cards back
-    }
+//   matchedCards.push(firstCard);
+  
+//   //check for a match
+//   matchCards();
+
+//   this.lastElementChild.classList.remove('hidden');
+//   this.firstElementChild.classList.add('hidden');
+
+//   cardsTurned.push(this.lastElementChild.src);
+//   console.log(cardsTurned);
+//   unflipCards();
+}
+function checkForMatch() {
+  if(firstCard.lastElementChild.src === secondCard.lastElementChild.src) {
+    disableCards();
+    increaseScore();
+    // return;
+  } else {
+    unflip();
   }
 }
+function disableCards() {
+  firstCard.removeEventListener('click', flipCard);
+  secondCard.removeEventListener('click', flipCard);
+}
+function unflip() {
+  setTimeout(() => {
+    firstCard.classList.remove('flip');
+    secondCard.classList.remove('flip');
+  }), 1500;
+}
+// function matchCards() {
+//   if(cardsTurned.length >= 2) {
+//     console.log('2 turned');
+//     if(cardsTurned[0] === cardsTurned[1]) {
+//       increaseScore();
+//       cardsTurned = [];
+//       //hide cards
+//     } else {
+//       lockBoard = true;
+//       // cards.forEach(card => console.log(card));
+//       console.log('flipping back');
+//       cardsTurned = [];
+
+//       unflipCards();      
+//     }
+//   }
+// }
+// function unflipCards() {
+//   setTimeout(function() {
+//     cards.forEach((card) => {
+//       // console.log(card.lastElementChild);
+//       card.classList.remove('flip');
+//       card.firstElementChild.classList.remove('hidden');
+//       card.lastElementChild.classList.add('hidden');
+//       lockBoard = false;
+//     });
+//   },1000);
+// }
 function addImage() {
   //loop through array of cards and attach image from corresponding index of shuffled array
   cards.forEach((card,index) => { 

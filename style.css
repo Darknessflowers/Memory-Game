@@ -65,6 +65,12 @@ backface-visibility: hidden;
 .card.flip {
   transform: rotateY(180deg);
 }
+.card.flip .frontFace {
+  display: block;
+}
+.card.flip .backFace {
+  display: none;
+}
 .frontFace {
   transform: rotateY(180deg);
 }
