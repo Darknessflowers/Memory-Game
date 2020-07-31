@@ -39,21 +39,37 @@ h1 {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 15px;
+  perspective: 1000px;
 }
 
-.tiles {
+.card {
   background: #fbfd8a;
   border-radius: 10px;
   height: 150px;
   padding: 10px;
   display: flex;
   justify-content: center;
-  transition: all 0.5s;
-}
-.tiles:hover {
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
   cursor: pointer;
 }
-.tiles.flip {
+.card .frontFace,
+.card .backFace {
+backface-visibility: hidden;
+}
+.card .frontFace {
+  object-fit: cover;
+  max-width: 100%;
+  object-position: center;
+}
+.card.flip {
   transform: rotateY(180deg);
-  transition: all 0.5s;
+}
+.frontFace {
+  transform: rotateY(180deg);
+}
+.hidden {
+  display: none;
+  /* visibility: hidden; */
+  /* opacity:0; */
 }
