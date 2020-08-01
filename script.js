@@ -146,7 +146,7 @@ function flipCard(e) {
 
   cardsTurned.push(this.lastElementChild.src);
   // console.log(cardsTurned);
-  if(cardsTurned.length >= 2) {
+  if(cardsTurned.length === 2) {
     console.log('2 turned');
     if(firstCard.lastElementChild.src === secondCard.lastElementChild.src) {
       increaseScore();
