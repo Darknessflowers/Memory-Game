@@ -40,6 +40,7 @@ h1 {
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 15px;
   perspective: 1000px;
+  margin-bottom: 30px;
 }
 
 .card {
@@ -62,14 +63,38 @@ backface-visibility: hidden;
   max-width: 100%;
   object-position: center;
 }
-.card.flip {
+.card.flip, .card.permaFlip {
   transform: rotateY(180deg);
 }
+
 .frontFace {
   transform: rotateY(180deg);
 }
-.hidden {
+.backFace {
+  transform: translateZ(1px);
+
+}
+.card.flip .frontFace,
+.card.permaFlip .frontFace {
+  display: block;
+}
+.card.flip .backFace,
+.card.permaFlip .backFace {
   display: none;
-  /* visibility: hidden; */
-  /* opacity:0; */
+}
+.frontFace.hidden {
+  display: none;
+}
+
+@media only screen and (max-width: 1100px) {
+  .wrap {
+    max-width: 90%;
+  }
+
+}
+@media only screen and (max-width: 800px) {
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

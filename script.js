@@ -120,6 +120,9 @@ function shuffleArray(array) {
   }
 return array;
 }
+let firstCard, secondCard;
+let hasBeenFlipped = false;
+
 function flipCard(e) {
   //fix bug with back image
   //fix bug where matched cards get flipped back when cards are looped through. May have to store more info about flipped cards.
@@ -128,21 +131,33 @@ function flipCard(e) {
   //push images to array when flipped 
   //if not a match then reset array
   //if 2 srcs match then loop through cards and find ID (querySelector?) of ID1 || ID2 and add permaMatch class that keeps it visible even when flipped is removed
-
   console.log('flip');
-  // console.log(this);
   if (lockBoard) return;
+
+  if(!hasBeenFlipped) {
+    firstCard = this;
+
+    hasBeenFlipped = true;
+  } else {
+    secondCard = this;
+    hasBeenFlipped = false;
+    // return;
+  }
+  console.log(`This first card stored is ${firstCard}`);
+  console.log(`This second card stored is ${secondCard}`);
   this.classList.add('flip');
   this.lastElementChild.classList.remove('hidden');
   this.firstElementChild.classList.add('hidden');
 
   cardsTurned.push(this.lastElementChild.src);
-  console.log(cardsTurned);
+  // console.log(cardsTurned);
   if(cardsTurned.length >= 2) {
     console.log('2 turned');
-    if(cardsTurned[0] === cardsTurned[1]) {
+    if(firstCard.lastElementChild.src === secondCard.lastElementChild.src) {
       increaseScore();
       cardsTurned = [];
+      firstCard.classList.add('permaFlip');
+      secondCard.classList.add('permaFlip');
       //hide cards
     } else {
       lockBoard = true;
@@ -183,9 +198,9 @@ function increaseScore() {
     alert('You won');
   }
 }
-
+//add all images to random cards on load
 addImage();
-// cards.forEach(card => addImage());
+//add event listener for clicking of cards
 cards.forEach(card => card.addEventListener('click', flipCard));
 
 // function flipCard(e) {
