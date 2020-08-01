@@ -132,8 +132,6 @@ backface-visibility: hidden;
   border-radius: 5px;
   box-shadow: var(--box-shadow);
   transition: all 0.2s;
-  display: flex;
-  flex-direction: column;
   font-size: 19px;
 }
 .winnerInner {

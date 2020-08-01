@@ -200,7 +200,7 @@ function endTimer() {
   
   // get seconds 
   let seconds = Math.round(timeDiff);
-  finalTime.innerHTML = `${seconds} seconds`;
+  finalTime.innerText = `${seconds} seconds`;
   console.log(seconds + " seconds");
 }
 //add all images to random cards on load
