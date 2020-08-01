@@ -22,6 +22,32 @@ h1 {
   font-size: 50px;
   margin: 0;
 }
+h2 {
+  text-transform: uppercase;
+  color: #086972;
+  font-weight: 900;
+  font-size: 40px;
+  margin: 0;
+}
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  margin-right: 8px;
+  background: #086972;
+  color: #fbfd8a;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+button:hover {
+  color: #086972;
+  background: #fbfd8a;
+  cursor: pointer;
+  transition: all 0.3s;
+}
 .info {
   text-transform: uppercase;
   text-align: right;
@@ -85,7 +111,41 @@ backface-visibility: hidden;
 .frontFace.hidden {
   display: none;
 }
-
+.winner {
+  background: hsla(0, 0%, 30%, 0.5);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.25s;
+  top: 0;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  --opacity: 0;
+  opacity: var(--opacity);
+}
+.winnerInner {
+  background: #87dfd6;
+  padding: 30px;
+  border: 3px solid var(--pink);
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  font-size: 19px;
+}
+.winnerInner {
+    font-size: 19px;
+}
+.winner.open {
+  --opacity: 1;
+  pointer-events: all;
+}
+#buttonRow {
+  margin-top: 20px;
+}
 @media only screen and (max-width: 1100px) {
   .wrap {
     max-width: 90%;

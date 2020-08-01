@@ -4,6 +4,11 @@ let scoreDisplay = document.querySelector('.score');
 let cardsTurnedNum = 0;
 let cardsTurned =[];
 let lockBoard = false;
+const refreshPage = document.querySelector('.refreshPage');
+const closeWinnerBox = document.querySelector('.closeWinner');
+const winnerBox = document.querySelector('.winner');
+var startTime, endTime;
+let finalTime = document.querySelector('.finalTime');
 
 let pairs = [
   {
@@ -124,14 +129,6 @@ let firstCard, secondCard;
 let hasBeenFlipped = false;
 
 function flipCard(e) {
-  //fix bug with back image
-  //fix bug where matched cards get flipped back when cards are looped through. May have to store more info about flipped cards.
-  
-  //IDEA: nested array. [[id,src], [id,src]];
-  //push images to array when flipped 
-  //if not a match then reset array
-  //if 2 srcs match then loop through cards and find ID (querySelector?) of ID1 || ID2 and add permaMatch class that keeps it visible even when flipped is removed
-  console.log('flip');
   if (lockBoard) return;
 
   if(!hasBeenFlipped) {
@@ -143,8 +140,6 @@ function flipCard(e) {
     hasBeenFlipped = false;
     // return;
   }
-  console.log(`This first card stored is ${firstCard}`);
-  console.log(`This second card stored is ${secondCard}`);
   this.classList.add('flip');
   this.lastElementChild.classList.remove('hidden');
   this.firstElementChild.classList.add('hidden');
@@ -158,7 +153,6 @@ function flipCard(e) {
       cardsTurned = [];
       firstCard.classList.add('permaFlip');
       secondCard.classList.add('permaFlip');
-      //hide cards
     } else {
       lockBoard = true;
       // cards.forEach(card => console.log(card));
@@ -167,21 +161,12 @@ function flipCard(e) {
 
       setTimeout(function() {
         cards.forEach((card) => {
-          // console.log(card.lastElementChild);
           card.classList.remove('flip');
           card.firstElementChild.classList.remove('hidden');
           card.lastElementChild.classList.add('hidden');
           lockBoard = false;
         });
       },1000);
-      // setTimeout(function() {
-      //   cards.forEach(card => {
-      //     console.log(card.lastElementChild);
-      //     // card.classList.remove('flip'));
-      //   }
-      // }, 2000);
-      
-      //turn cards back
     }
   }
 }
@@ -195,33 +180,37 @@ function increaseScore() {
   score++;
   scoreDisplay.innerHTML = `${score}/10`;
   if(score === 10) {
-    alert('You won');
+    //stopTimer
+    endTimer();
+    setTimeout(() => {
+      winnerBox.classList.add('open');
+    },300);
   }
+}
+
+function startTimer() {
+  startTime = performance.now();
+};
+
+function endTimer() {
+  endTime = performance.now();
+  let timeDiff = endTime - startTime; //in ms 
+  // strip the ms 
+  timeDiff /= 1000; 
+  
+  // get seconds 
+  let seconds = Math.round(timeDiff);
+  finalTime.innerHTML = `${seconds} seconds`;
+  console.log(seconds + " seconds");
 }
 //add all images to random cards on load
 addImage();
+startTimer();
 //add event listener for clicking of cards
 cards.forEach(card => card.addEventListener('click', flipCard));
-
-// function flipCard(e) {
-//   console.log(e.currentTarget);
-// }
-//TO DO
-//populate pairs array with all 10 Jonti Images
-//populate grid with all the jonti images
-//get images loading in a random order
-//by default have back of card showing 
-//if clicked on show front
-//if only one card is clicked then keep showing
-//if it is the second card turned then if a match add to score and keep on 
-// otherwise turn both cards back
-//once all 10 matches are found pop up a you won! screen
-
-// cards.addEventListener('click', function(e) {
-//   console.log(e.currentTarget);
-// });
-
-// cards.addEventListener('click', e => {
-//   console.log(e.currentTarget);
-//   console.log(this);
-// });
+refreshPage.addEventListener('click', () => {
+  window.location.reload();
+});
+closeWinnerBox.addEventListener('click', () => {
+  winnerBox.classList.remove('open');
+});
