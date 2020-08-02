@@ -65,23 +65,40 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 15px;
+  -webkit-perspective: 1000px;
   perspective: 1000px;
   margin-bottom: 30px;
 }
 
 .card {
   background: #fbfd8a;
+  /* background: transparent; */
   border-radius: 10px;
   height: 150px;
   padding: 10px;
   display: flex;
   justify-content: center;
+  -webkit-transition: transform 0.5s;
   transition: transform 0.5s;
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   cursor: pointer;
 }
+.card img {
+  /* padding: 10px; */
+  /* border-radius: 10px; */
+  background: #fbfd8a;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+/* .card .backFace {
+  flex: 1;
+} */
 .card .frontFace,
 .card .backFace {
+-webkit-backface-visibility: hidden;
 backface-visibility: hidden;
 }
 .card .frontFace {
@@ -90,13 +107,16 @@ backface-visibility: hidden;
   object-position: center;
 }
 .card.flip, .card.permaFlip {
+  -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
 
 .frontFace {
+  -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
 .backFace {
+  -webkit-transform: translateZ(1px);
   transform: translateZ(1px);
 
 }
@@ -116,6 +136,7 @@ backface-visibility: hidden;
   position: fixed;
   height: 100vh;
   width: 100vw;
+  -webkit-transition: all 0.25s;
   transition: all 0.25s;
   top: 0;
   display: grid;
@@ -131,6 +152,7 @@ backface-visibility: hidden;
   border: 3px solid var(--pink);
   border-radius: 5px;
   box-shadow: var(--box-shadow);
+  -webkit-transition: all 0.2s;
   transition: all 0.2s;
   font-size: 19px;
 }
@@ -154,5 +176,12 @@ backface-visibility: hidden;
 
   .grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 400px) {
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
