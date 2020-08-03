@@ -136,7 +136,7 @@ function flipCard(e) {
     console.log(firstCard);
     hasBeenFlipped = true;
   } else {
-    if(this.lastElementChild.id !== firstCard.lastElementChild.id) {
+    if(this.lastElementChild.lastElementChild.id !== firstCard.lastElementChild.lastElementChild.id) {
       secondCard = this;
     } else {
       return;
@@ -175,9 +175,14 @@ function flipCard(e) {
 }
 function addImage() {
   //loop through array of cards and attach image from corresponding index of shuffled array
-  cards.forEach((card,index) => { 
-    card.lastElementChild.src = shuffledArray[index].frontFace;
-    card.lastChild.id = shuffledArray[index].id;
+  cards.forEach((card,index) => {
+    let cardFrontface = card.querySelector('.frontFace img');
+    console.log(cardFrontface);
+    console.log(card.lastElementChild); 
+    card.lastElementChild.src
+    console.log(card.lastElementChild.firstElementChild.src);
+    cardFrontface.src = shuffledArray[index].frontFace;
+    card.lastElementChild.firstElementChild.id = shuffledArray[index].id;
   });
 }
 function increaseScore() {
