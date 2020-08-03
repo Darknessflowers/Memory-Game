@@ -7,7 +7,7 @@ let lockBoard = false;
 const refreshPage = document.querySelector('.refreshPage');
 const closeWinnerBox = document.querySelector('.closeWinner');
 const winnerBox = document.querySelector('.winner');
-var startTime, endTime;
+let startTime, endTime;
 let finalTime = document.querySelector('.finalTime');
 
 let pairs = [
@@ -133,10 +133,15 @@ function flipCard(e) {
 
   if(!hasBeenFlipped) {
     firstCard = this;
-
+    console.log(firstCard);
     hasBeenFlipped = true;
   } else {
-    secondCard = this;
+    if(this.lastElementChild.id !== firstCard.lastElementChild.id) {
+      secondCard = this;
+    } else {
+      return;
+    }
+    console.log(secondCard);
     hasBeenFlipped = false;
     // return;
   }
@@ -147,18 +152,16 @@ function flipCard(e) {
   cardsTurned.push(this.lastElementChild.src);
   // console.log(cardsTurned);
   if(cardsTurned.length === 2) {
-    console.log('2 turned');
-    if(firstCard.lastElementChild.src === secondCard.lastElementChild.src) {
+    if (lockBoard) return;
+    if(firstCard.lastElementChild.src === secondCard.lastElementChild.src && firstCard.lastElementChild.id !== secondCard.lastElementChild.id) {
       increaseScore();
       cardsTurned = [];
       firstCard.classList.add('permaFlip');
       secondCard.classList.add('permaFlip');
     } else {
-      lockBoard = true;
-      // cards.forEach(card => console.log(card));
       console.log('flipping back');
       cardsTurned = [];
-
+      lockBoard = true;
       setTimeout(function() {
         cards.forEach((card) => {
           card.classList.remove('flip');
@@ -174,6 +177,7 @@ function addImage() {
   //loop through array of cards and attach image from corresponding index of shuffled array
   cards.forEach((card,index) => { 
     card.lastElementChild.src = shuffledArray[index].frontFace;
+    card.lastChild.id = shuffledArray[index].id;
   });
 }
 function increaseScore() {
