@@ -73,7 +73,6 @@ button:hover {
 .card {
   background: #fbfd8a;
   border-radius: 10px;
-  /* height: 150px; */
   padding: 10px;
   display: flex;
   justify-content: center;
@@ -95,7 +94,7 @@ button:hover {
   max-width: 100%;
   object-position: center;
 }
-/* .card.flip, .card.permaFlip {
+.card.flip, .card.permaFlip {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
@@ -103,7 +102,7 @@ button:hover {
 .frontFace {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
-} */
+}
 .backFace {
   -webkit-transform: translateZ(1px);
   transform: translateZ(1px);
@@ -183,7 +182,7 @@ button:hover {
   -webkit-backface-visibility: visible;
   backface-visibility: visible;
 }
-/* .card.flip, .card.permaFlip {
+.card.flip, .card.permaFlip {
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
 }
@@ -191,5 +190,5 @@ button:hover {
 .frontFace {
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
-} */
+}
 }
