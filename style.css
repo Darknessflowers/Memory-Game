@@ -170,4 +170,12 @@ backface-visibility: hidden;
     perspective: 3000px;
     grid-template-columns: repeat(2, 1fr);
   }
+  .card {
+    -webkit-transform-style: initial;
+    transform-style: initial;
+}
+.card .frontFace,
+.card .backFace {
+backface-visibility: visible;
+}
 }
