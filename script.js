@@ -120,9 +120,9 @@ function flipCard(e) {
         secondCard = this;
     }
     else {
-      hasBeenFlipped = false;
-      // return;
+      return;
     }
+    hasBeenFlipped = false;
   }
   this.classList.add('flip');
     //remove hidden from Frontface
@@ -140,15 +140,15 @@ function flipCard(e) {
       firstCard.classList.add('permaFlip');
       secondCard.classList.add('permaFlip');
     } else {
-      lockBoard = true;
-      // cards.forEach(card => console.log(card));
       console.log('flipping back');
       cardsTurned = [];
-
+      lockBoard = true;
       setTimeout(function() {
         cards.forEach((card) => {
           card.classList.remove('flip');
+          //remove hidden from backface
           card.firstElementChild.classList.remove('hidden');
+          //add back to front face
           card.lastElementChild.classList.add('hidden');
           lockBoard = false;
         });
