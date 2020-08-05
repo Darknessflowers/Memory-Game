@@ -183,7 +183,7 @@ button:hover {
   -webkit-backface-visibility: visible;
   backface-visibility: visible;
 }
-.card.flip, .card.permaFlip {
+/* .card.flip, .card.permaFlip {
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
 }
@@ -191,5 +191,5 @@ button:hover {
 .frontFace {
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
-}
+} */
 }
