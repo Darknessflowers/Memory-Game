@@ -86,7 +86,8 @@ button:hover {
 }
 .card .frontFace,
 .card .backFace {
-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .card .frontFace {
   object-fit: cover;
@@ -176,6 +177,7 @@ backface-visibility: hidden;
 }
 .card .frontFace,
 .card .backFace {
-backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
 }
 }
