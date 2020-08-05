@@ -58,7 +58,7 @@ button:hover {
   font-weight: 700;
 }
 .wrap {
-  max-width: 1100px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .grid {
@@ -105,7 +105,7 @@ backface-visibility: hidden;
 .backFace {
   -webkit-transform: translateZ(1px);
   transform: translateZ(1px);
-
+  max-width: 100%;
 }
 .card.flip .frontFace,
 .card.permaFlip .frontFace {
@@ -162,5 +162,12 @@ backface-visibility: hidden;
 
   .grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 500px) {
+  .grid {
+    -webkit-perspective: 3000px;
+    perspective: 3000px;
+    grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -101,26 +101,24 @@ function shuffleArray(array) {
     const temp = array[i];
     array[i] = array[j];
     array[j] = temp;
-    // return temp;
   }
 return array;
 }
 let firstCard, secondCard;
 let hasBeenFlipped = false;
 
-function flipCard(e) {
+function flipCard() {
   if (lockBoard) return;
 
   if(!hasBeenFlipped) {
     firstCard = this;
     hasBeenFlipped = true;
   } 
+  else if (this === firstCard) return;
   else {
+    
     if(this.lastElementChild.id !== firstCard.firstElementChild.id) {
         secondCard = this;
-    }
-    else {
-      return;
     }
     hasBeenFlipped = false;
   }
@@ -133,7 +131,7 @@ function flipCard(e) {
   cardsTurned.push(this.lastElementChild.src);
   // console.log(cardsTurned);
   if(cardsTurned.length === 2) {
-    console.log('2 turned');
+    if (lockBoard) return;
     if(firstCard.lastElementChild.src === secondCard.lastElementChild.src && firstCard.lastElementChild.id !== secondCard.lastElementChild.id ) {
       increaseScore();
       cardsTurned = [];
@@ -184,7 +182,6 @@ function endTimer() {
   let timeDiff = endTime - startTime; //in ms 
   // strip the ms 
   timeDiff /= 1000; 
-  
   // get seconds 
   let seconds = Math.round(timeDiff);
   finalTime.innerText = `${seconds} seconds`;
