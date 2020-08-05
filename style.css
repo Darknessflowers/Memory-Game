@@ -95,7 +95,7 @@ button:hover {
   max-width: 100%;
   object-position: center;
 }
-.card.flip, .card.permaFlip {
+/* .card.flip, .card.permaFlip {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
@@ -103,7 +103,7 @@ button:hover {
 .frontFace {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
-}
+} */
 .backFace {
   -webkit-transform: translateZ(1px);
   transform: translateZ(1px);

@@ -150,7 +150,7 @@ function flipCard() {
           card.lastElementChild.classList.add('hidden');
           lockBoard = false;
         });
-      },1000);
+      },700);
     }
   }
 }
