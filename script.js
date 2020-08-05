@@ -10,7 +10,7 @@ const winnerBox = document.querySelector('.winner');
 var startTime, endTime;
 let finalTime = document.querySelector('.finalTime');
 
-let pairs = [
+let levelOne = [
   {
     id: 1,
     frontFace: 'img/jonti-blanket.jpg',
@@ -93,7 +93,6 @@ let pairs = [
   },
 ];
 
-let shuffledArray = shuffleArray(pairs); //will mutate original array
 
 function shuffleArray(array) {
   for(let i = array.length - 1; i > 0; i--) {
@@ -157,8 +156,8 @@ function flipCard() {
 function addImage() {
   //loop through array of cards and attach image from corresponding index of shuffled array
   cards.forEach((card,index) => { 
-    card.lastElementChild.src = shuffledArray[index].frontFace;
-    card.lastElementChild.id = shuffledArray[index].id;
+    card.lastElementChild.src = levelOne[index].frontFace;
+    card.lastElementChild.id = levelOne[index].id;
   });
 }
 function increaseScore() {
@@ -188,6 +187,7 @@ function endTimer() {
   console.log(seconds + " seconds");
 }
 //add all images to random cards on load
+shuffleArray(levelOne); //will mutate original array
 addImage();
 startTimer();
 //add event listener for clicking of cards
